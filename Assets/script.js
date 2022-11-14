@@ -1,7 +1,9 @@
 var userInput = document.getElementById("user-input");
 var userForm = document.getElementById("form-sbt");
-var apiKey = "d91f911bcf2c0f925fb6535547a5ddc9"
+var apiKey = "0979296881ad793a95b3a80e818231f4"
 var dayForecast = document.getElementById("current-forecast")
+var h1El = document.createElement("h1")
+var now = dayjs().format('MM-DD-YYYY')
 
 function fetchCoordinates(city) {
     console.log(city)
@@ -27,14 +29,24 @@ function fetchWeather (lat, lon) {
     return response.json()
     })
     .then(function(data) {
+        console.log(data)
         var h1El = document.createElement("h1")
-        h1El.textContent = data.list[0].main.temp
+        h1El.textContent = data.city.name
         dayForecast.append(h1El)
+        var temp = document.createElement("h3")
+        temp.textContent = "Temp: " + data.list[0].main.temp + "°F"
+        dayForecast.append(temp)
+        var wind = document.createElement("h3")
+        wind.textContent = "Wind: " + data.list[0].wind.speed + "MPH"
+        dayForecast.append(wind)
+        var humid = document.createElement("h3")
+        humid.textContent = "Humidity: " + data.list[0].main.humidity + "%"
+        dayForecast.append(humid)
+        var weather = document.createElement("h3")
+        weather.textContent = data.list[0].weather[0].main
+        dayForecast.append(weather)
+        h1El.append(" " + now)
     })
-}
-
-function renderDayForecast () {
-
 }
 
 // This function is responsible for form submission by capturing userInput
@@ -45,8 +57,3 @@ var handleFormSubmit =  function(e) {
 }
 
 userForm.addEventListener("submit", handleFormSubmit)
-
-//local storage
-//create an empty array
-//push that value(city name) to the array
-//
