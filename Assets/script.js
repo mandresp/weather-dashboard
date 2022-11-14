@@ -17,7 +17,7 @@ var daySix = dayjs().add(5, 'day').format('MM-DD-YYYY')
 
 function fetchCoordinates(city) {
     console.log(city)
-    var apiCall = "http://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + apiKey;
+    var apiCall = "https://api.openweathermap.org/geo/1.0/direct?q=" + city + "&appid=" + apiKey;
 
     fetch(apiCall)
         .then(function(response) {
